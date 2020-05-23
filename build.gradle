@@ -1,0 +1,48 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.4.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+	id "org.flywaydb.flyway" version "6.1.4"
+}
+
+group = 'com.java'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('swaggerVersion', "2.9.2")
+}
+
+dependencies {
+	implementation "io.springfox:springfox-swagger-ui:${swaggerVersion}"
+	implementation "io.springfox:springfox-swagger2:${swaggerVersion}"
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//implementation 'org.flywaydb:flyway-core'
+	compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.7'
+	compile "io.jsonwebtoken:jjwt:0.8.0"
+	compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'mysql:mysql-connector-java'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+test {
+	useJUnitPlatform()
+}
