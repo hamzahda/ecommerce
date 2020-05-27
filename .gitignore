@@ -5,6 +5,7 @@ build/
 !**/src/main/**
 !**/src/test/**
 srcc
+src/main/java/com/website/dto 
 ### STS ###
 .apt_generated
 .classpath
