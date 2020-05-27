@@ -9,7 +9,7 @@ public interface IUserService {
     public User createUser(User user);
     public List<User> getUser();
     public User findById(long id);
-    User changeDetails(String name);
+    User changeDetails(User user, User userData);
     public void deleteUserById(long id);
     public boolean checkUser(long id);
     public void delete(String username);

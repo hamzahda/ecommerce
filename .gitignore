@@ -5,7 +5,10 @@ build/
 !**/src/main/**
 !**/src/test/**
 srcc
-src/main/java/com/website/dto 
+src/main/java/com/website/dto/Token*.java
+
+src/main/java/com/website/dto/UserData*.java
+src/main/java/com/website/dto/UserLogin*.java
 ### STS ###
 .apt_generated
 .classpath

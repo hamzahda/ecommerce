@@ -2,6 +2,7 @@ package com.website.service;
 
 import java.util.List;
 
+
 import com.website.model.User;
 import com.website.repository.UserRepository;
 
@@ -33,7 +34,6 @@ public class UserService implements IUserService {
        userRepository.deleteById(id);
     }
 
-           
 	public void delete(String username) {
 		userRepository.deleteByUsername(username);
 	}
@@ -43,7 +43,11 @@ public class UserService implements IUserService {
 		return user;
 	}
 
-	public User changeDetails(String name) {
-		return null;
+	public User changeDetails(User user, User userData) {
+        user.setEmail(userData.getEmail());
+        user.setRoles(userData.getRoles());
+        user.setPassword(userData.getPassword());
+        return userRepository.save(user);
     }
+
 }

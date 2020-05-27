@@ -2,20 +2,25 @@ package com.website.controller;
 
 
 
+
+import java.util.List;
+
 import com.website.dto.UserResponseDTO;
 import com.website.model.User;
 import com.website.service.UserService;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 
 @RestController
@@ -28,29 +33,55 @@ public class UserController {
   @Autowired
   private UserService userService;
 
-
-  @GetMapping()
-  public List<User> getAll() {
-    return userService.getUser() ;
+  @GetMapping(value = "/")
+  public ResponseEntity<List<User>> getAll() {
+    return ResponseEntity.ok(userService.getUser());   
   }
 
-  @PutMapping("/{username}")
-  public User changeDetails(@PathVariable String name ) {
-    return userService.changeDetails(name);
+  @GetMapping(value = "/{id}")
+  public ResponseEntity<User> getUser(@PathVariable Long id) {
+    if (!userService.checkUser(id)) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+    return ResponseEntity.ok(userService.findById(id));
   }
-
-  @DeleteMapping(value = "/{username}")
-  public String delete( @PathVariable String username) {
-    userService.delete(username);
-    return username;
-  }
-
 
   @GetMapping(value = "/{username}")
   public UserResponseDTO search(@PathVariable String username) {
-    return modelMapper.map(userService.search(username), UserResponseDTO.class);
+  return modelMapper.map(userService.search(username), UserResponseDTO.class);
+  }
+
+  @PostMapping("/")
+  public ResponseEntity<User> postUser (@RequestBody final User user){
+    return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user));
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> deleteUser (@PathVariable final long id){
+    if (!userService.checkUser(id)) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+    return ResponseEntity.ok(String.format("User with ID : %d is deleted successfuly", id));
+}
+
+  @PutMapping("/{name}")
+  public ResponseEntity<User> modifyUser(@RequestBody final User userData, @PathVariable final String name) {
+    User user =  userService.search(name);
+    if ( user != null) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+    return ResponseEntity.ok(userService.changeDetails(user , userData ));
   }
 
 
+  @DeleteMapping(value = "/{username}")
+  public ResponseEntity<String> delete(@PathVariable String username) {
+    User user =  userService.search(username);
+    if ( user != null) {
+      userService.delete(username);
+    }
+    
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null) ;
+  }
 
 }
