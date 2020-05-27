@@ -1,33 +1,21 @@
 package com.website.controller;
 
-package com.dev.controller;
 
-import javax.servlet.http.HttpServletRequest;
 
-import com.website.dto.TokenUserResponseDTO;
-import com.website.dto.UserDataDTO;
-import com.website.dto.UserLoginDTO;
 import com.website.dto.UserResponseDTO;
 import com.website.model.User;
 import com.website.service.UserService;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import java.util.List;
 
 
 @RestController
@@ -42,13 +30,13 @@ public class UserController {
 
 
   @GetMapping()
-  public String getAll() {
-    return userService.getAll();
+  public List<User> getAll() {
+    return userService.getUser() ;
   }
 
   @PutMapping("/{username}")
-  public String changeDetails(@RequestBody User user) {
-    return userService.changeDetails(user);
+  public User changeDetails(@PathVariable String name ) {
+    return userService.changeDetails(name);
   }
 
   @DeleteMapping(value = "/{username}")

@@ -1,9 +1,9 @@
-package com.user.service;
+package com.website.service;
 
 import java.util.List;
 
-import com.user.entity.User;
-import com.user.repository.UserRepository;
+import com.website.model.User;
+import com.website.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,14 +29,6 @@ public class UserService implements IUserService {
             .orElse(null);
     }
 
-    public User update(final User modifiedUser) {
-        User toModifyUser = userRepository.findById(modifiedUser.getId())
-            .orElse(null);
-        toModifyUser.setAddress(modifiedUser.getAddress());
-        toModifyUser.setName(modifiedUser.getName());
-        return userRepository.save(toModifyUser);
-    }
-
     public void deleteUserById(final long id) {
        userRepository.deleteById(id);
     }
@@ -50,4 +42,8 @@ public class UserService implements IUserService {
 		User user = userRepository.findByUsername(username);
 		return user;
 	}
+
+	public User changeDetails(String name) {
+		return null;
+    }
 }
