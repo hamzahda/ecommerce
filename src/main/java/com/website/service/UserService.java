@@ -3,6 +3,7 @@ package com.website.service;
 import java.util.List;
 
 import javax.naming.AuthenticationException;
+import javax.servlet.http.HttpServletRequest;
 
 import com.website.dto.TokenUserResponseDTO;
 import com.website.exception.CustomException;
@@ -77,9 +78,11 @@ public class UserService implements IUserService {
 
 	public User search(String username) {
 		User user = userRepository.findByUsername(username);
+		if (user == null) {
+			throw new CustomException("The user doesn't exist", HttpStatus.NOT_FOUND);
+		}
 		return user;
 	}
-
 	public User changeDetails(User user, User userData) {
         user.setEmail(userData.getEmail());
         user.setRoles(userData.getRoles());
@@ -87,5 +90,12 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
+    public User whoami(HttpServletRequest req) {
+		return userRepository.findByUsername(jwtTokenProvider.getUsername(jwtTokenProvider.resolveToken(req)));
+	}
+
+	public String refresh(String username) {
+		return jwtTokenProvider.createToken(username, userRepository.findByUsername(username).getRoles());
+	}
 
 }

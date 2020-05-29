@@ -3,6 +3,7 @@ package com.website.controller;
 import java.util.List;
 
 import javax.naming.AuthenticationException;
+import javax.servlet.http.HttpServletRequest;
 
 import com.website.dto.TokenUserResponseDTO;
 import com.website.dto.UserDataDTO;
@@ -93,4 +94,13 @@ public class UserController {
     return userService.signup(modelMapper.map(user, User.class));
   }
   
+  @GetMapping(value = "/me")
+  public UserResponseDTO whoami(HttpServletRequest req) {
+    return modelMapper.map(userService.whoami(req), UserResponseDTO.class);
+  }
+
+  @GetMapping("/refresh")
+  public String refresh(HttpServletRequest req) {
+    return userService.refresh(req.getRemoteUser());
+  }
 }
