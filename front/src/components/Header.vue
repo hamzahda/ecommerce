@@ -9,6 +9,7 @@
       </b-nav-form>
       <b-navbar-nav class="ml-auto">
         <b-nav-text> <a href="/cart">cart( {{cart}} ) </a></b-nav-text>
+        <b-icon-minecart-loaded/>
         <b-button class="my-2 my-sm-0 login" right>LogIn</b-button>
       </b-navbar-nav>
     </b-navbar>

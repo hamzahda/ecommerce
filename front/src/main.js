@@ -21,6 +21,11 @@ const router = new VueRouter({
       name: "Welcome",
       component: () => import("./views/Welcome.vue"),
     },
+    {
+      path: "/plist",
+      name: "plist",
+      component: () => import("./views/PList.vue"),
+    },
   ],
 });
 new Vue({

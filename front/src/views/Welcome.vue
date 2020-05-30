@@ -9,8 +9,10 @@
         :image="slide.image"
       />
     </vueper-slides>
-    <button>SHOP NOW</button>
-    <div class="div"></div>
+    <div class="center">
+      <button class="button">SHOP NOW</button>
+      <div class="div">  <img src=""  >  </div>
+    </div>
   </section>
 </template>
 <script>
@@ -41,4 +43,24 @@ export default {
 
 
 <style scoped>
+
+.center{
+  display: flex;
+  justify-content: center;
+}
+#welcome{
+
+  background-color: whitesmoke;
+  height: 100vh;
+}
+.button{
+  padding: 0.5rem;
+  margin: 1rem;
+
+  color: snow;
+  background-color:coral ;
+
+  border-style: none;
+}
+
 </style>
