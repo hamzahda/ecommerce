@@ -127,16 +127,17 @@ export default{
   
   actions: { 
        
-    addToCart({ commit }, product) {
+    addToCart({ commit }, product , qnty) {
       let cart=[];
       let updatedCart = [];
       const newProduct = {
-        id : product.id,
+        price : product.price,
         name : product.name,
-        count : 1
+        link : product.link,
+        qnty : qnty,
       }
       cart = getData("cart");
-      let filter = cart.filter(el => {return el.id === newProduct.id; });
+      let filter = cart.filter(el => {return el.name === newProduct.name; });
 
       if (cart.length === 0) {      
         updatedCart[0] = newProduct; 
@@ -146,8 +147,8 @@ export default{
       }
       else{
         for (let el of cart) {
-          if(el.id === newProduct.id){
-            el.count++;
+          if(el.name === newProduct.name){
+            el.qnty++;
          }
         }
         updatedCart = cart;

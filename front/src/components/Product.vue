@@ -1,36 +1,48 @@
 <template>
   <div class="product">
-    <img src="" />
-    <div class="name"></div>
-    <div class="price"></div>
-    <input type="number"  value="0">
-    <button class="butn">ADD TO CART</button>
+    <div>
+      <img :src="product.link" />
+    </div>
+    <div class="details">
+      <div class="name">{{product.name}}</div>
+      <div class="price">{{product.price}}</div>
+      <input ref="nrInput" type="number" value="1" />
+      <button class="butn" @click="addToCart(product, this.$refs.nrInput.value)">ADD TO CART</button>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
-  name: "",
-  props:{
-      src: String,
-      name: String,
-
-      price: String,
-      
+  props: ["product"],
+  methods: {
+    ...mapActions(["addToCart", "remove"], "cart")
   },
-  methods: {},
   computed: {},
-  data : ()=>{
-      return{
-          counts : 0,
-      }
+  data: () => {
+    return {
+      counts: 0
+    };
   }
 };
 </script>
 <style scoped>
+.product {
+  text-align: center;
+  background-color: rosybrown;
 
-.product{
-    text-align:center;
+  width: 11rem;
+  height: 11rem;
 }
+input {
+  width: 4rem;
+  border-style: none;
 
+
+}
+.deatils{
+  display: flex;
+  justify-content: center;
+}
 </style>

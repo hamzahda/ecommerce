@@ -26,6 +26,17 @@ public class Product{
   @Column()
   private double price;
 
+  @Column()
+  private String img_link;
+  
+  public String getImg_link() {
+    return img_link  ;
+  }
+
+  public void setImg_link(String img_link) {
+    this.img_link = img_link;
+  }
+
   public Long getId() {
     return id;
   }

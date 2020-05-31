@@ -1,17 +1,16 @@
 package com.website.dto;
 
-/* 
-Author hamzahda
-
-*/
-
+import io.swagger.annotations.ApiModelProperty;
 
 public class TokenUserResponseDTO {
 
+	@ApiModelProperty(position = 1)
 	private String token;
 
+	@ApiModelProperty(position = 2)
 	private boolean error;
 
+	@ApiModelProperty(position = 3)
 	private String message;
 
 	public String getToken() {

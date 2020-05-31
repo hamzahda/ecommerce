@@ -28,12 +28,12 @@ export default {
     {
       title: '',
       content: '',
-      image: require('../assets/slide.jpg')
+      image: require('../assets/cosm.jpg')
     },
     {
       title: '',
       content: '',
-      image: require('../assets/slide.jpg')
+      image: require('../assets/cosm.jpg')
     }
   ],
     }

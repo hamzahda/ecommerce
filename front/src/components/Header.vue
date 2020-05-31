@@ -8,8 +8,10 @@
         <b-button variant="outline-success" class="my-2 my-sm-0" type="submit">Search</b-button>
       </b-nav-form>
       <b-navbar-nav class="ml-auto">
-        <b-nav-text> <a href="/cart">cart( {{cart}} ) </a></b-nav-text>
-        <b-icon-minecart-loaded/>
+        <b-navbar-text>
+          <a href="/cart">  cart( {{count}} )  </a>
+        </b-navbar-text>
+        <b-icon-minecart-loaded />
         <b-button class="my-2 my-sm-0 login" right>LogIn</b-button>
       </b-navbar-nav>
     </b-navbar>
@@ -17,15 +19,21 @@
 </template>
 
 <script>
+import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   name: "header",
-  methods: {},
-  computed: {}
+  components: {},
+  methods: {
+    ...mapMutations(["addToCart"], "cart"),
+    ...mapActions(["test"], "cart")
+  },
+  computed: {
+    ...mapGetters(["count"], "cart")
+  }
 };
 </script>
 <style scoped>
-
-.login{
+.login {
   margin-left: 1rem;
 }
 </style>

@@ -43,6 +43,10 @@ public class UserController {
   @Autowired
   private UserService userService;
 
+
+  /*
+    @return list of all the  users
+  */
   @ApiOperation(value = "${UserController.getAll}")
   @ApiResponses(value = {//
     @ApiResponse(code = 400, message = "Something went wrong"), 
@@ -52,6 +56,13 @@ public class UserController {
   public ResponseEntity<List<User>> getAll() {
     return ResponseEntity.ok(userService.getUser());
   }
+
+  
+  /*
+    @return user by his id
+  */
+  
+  
   @ApiResponses(value = {//
     @ApiResponse(code = 400, message = "Something went wrong"), 
     @ApiResponse(code = 403, message = "Access denied"), 
@@ -65,6 +76,15 @@ public class UserController {
     }
     return ResponseEntity.ok(userService.findById(id));
   }
+
+
+
+  
+  /*
+    search for a user
+  */
+
+
   @ApiResponses(value = {
     @ApiResponse(code = 400, message = "Something went wrong"), 
     @ApiResponse(code = 403, message = "Access denied"), 
@@ -75,6 +95,12 @@ public class UserController {
   public UserResponseDTO search(@PathVariable String username) {
     return modelMapper.map(userService.search(username), UserResponseDTO.class);
   }
+  
+  
+  
+  /*
+    delete user by his id
+  */
   @ApiOperation(value = "${UserController.deleteUser(id)}")
   @ApiResponses(value = {
     @ApiResponse(code = 400, message = "Something went wrong"), 
@@ -88,6 +114,10 @@ public class UserController {
     }
     return ResponseEntity.ok(String.format("User with ID : %d is deleted successfuly", id));
   }
+  
+  /*
+    @return the modified user
+  */ 
   @ApiOperation(value = "${UserController.modifyUser}")
   @ApiResponses(value = {
     @ApiResponse(code = 400, message = "Something went wrong"), 
@@ -102,6 +132,12 @@ public class UserController {
     }
     return ResponseEntity.ok(userService.changeDetails(user, userData));
   }
+
+  /*
+    delete user given his name
+  */
+
+
   @ApiOperation(value = "${UserController.delete}")
   @ApiResponses(value = {//
     @ApiResponse(code = 400, message = "Something went wrong"), 
@@ -117,6 +153,12 @@ public class UserController {
 
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
   }
+
+
+  /*
+    @return TokenUserResponseDTO including the token
+  */
+
   @ApiOperation(value = "${UserController.signin}")
   @ApiResponses( value = { 
       @ApiResponse(code = 400, message = "Something went wrong"),
@@ -126,6 +168,11 @@ public class UserController {
   public TokenUserResponseDTO login(@RequestBody UserLoginDTO user) throws AuthenticationException {
     return userService.signin(user.getUsername(), user.getPassword());
   }
+
+  
+  /*
+    @return signed up user
+  */
   @ApiOperation(value = "${UserController.signup}")
   @PostMapping("/signup")
   @ApiResponses(value = {
@@ -136,6 +183,11 @@ public class UserController {
   public User signup( @RequestBody UserDataDTO user) {
     return userService.signup(modelMapper.map(user, User.class));
   }
+  
+  /*
+    @return logged in user
+  */
+  
   @ApiOperation(value = "${UserController.me}")
   @ApiResponses(value = {
     @ApiResponse(code = 400, message = "Something went wrong"), 
@@ -145,13 +197,22 @@ public class UserController {
   public UserResponseDTO whoami(HttpServletRequest req) {
     return modelMapper.map(userService.whoami(req), UserResponseDTO.class);
   }
+
+  /*
+    @return refreshed  token
+  */
   @ApiOperation(value = "${UserController.refresh}")
   @GetMapping("/refresh")
   public String refresh(HttpServletRequest req) {
     return userService.refresh(req.getRemoteUser());
   }
 
-public ResponseEntity<User> postUser(User user) {
+
+  /*
+    @return created user
+  */
+  @ApiOperation(value = "${UserController.postUser}")
+  public ResponseEntity<User> postUser(User user) {
    user =  userService.createUser(user);
    return ResponseEntity.status(HttpStatus.CREATED).body(user);
 }

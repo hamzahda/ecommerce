@@ -4,11 +4,13 @@ import Vue from "vue";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import VueRouter from "vue-router";
 import App from "./App.vue";
+import store from './store'
+import Vuex from 'vuex'
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
-
+Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
@@ -26,9 +28,14 @@ const router = new VueRouter({
       name: "plist",
       component: () => import("./views/PList.vue"),
     },
+    {
+      path: "/cart",
+      name: "cart",
+      component: () => import("./views/Cart.vue"),
+    },
   ],
 });
-new Vue({
+new Vue({store,
   router,
   render: (h) => h(App),
 }).$mount("#app");

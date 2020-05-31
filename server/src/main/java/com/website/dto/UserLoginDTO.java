@@ -1,14 +1,13 @@
 package com.website.dto;
 
-
-/* 
-Author hamzahda
-
-*/
+import io.swagger.annotations.ApiModelProperty;
 
 public class UserLoginDTO {
 
+  @ApiModelProperty(position = 0)
   private String username;
+
+  @ApiModelProperty(position = 1)
   String password;
 
 public String getUsername() {

@@ -1,20 +1,20 @@
 package com.website.dto;
 
-/* 
-Author hamzahda
-
-*/
-
 import java.util.List;
 
 import com.website.model.Role;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class UserDataDTO {
   
-
+  @ApiModelProperty(position = 0)
   private String username;
+  @ApiModelProperty(position = 1)
   private String email;
+  @ApiModelProperty(position = 2)
   private String password;
+  @ApiModelProperty(position = 3)
   List<Role> roles;
 
   public String getUsername() {
