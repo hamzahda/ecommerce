@@ -1,6 +1,6 @@
 package com.website.repository;
 
-import javax.transaction.Transactional;
+
 
 import com.website.model.Product;
 
@@ -15,11 +15,5 @@ Author hamzahda
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-
-  boolean existsByProductname(String Productname);
   Product findByProductname(String Productname);
-  
-  @Transactional
-  void deleteByProductname(String Productname);
-
 }

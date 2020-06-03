@@ -28,7 +28,15 @@ public class Product{
 
   @Column()
   private String img_link;
+
+
+  @Column()
+  private String stock;
+
+
   
+
+
   public String getImg_link() {
     return img_link  ;
   }
@@ -55,6 +63,14 @@ public class Product{
 
   public void setPrice(double price) {
     this.price = price;
+  }
+
+  public String getStock() {
+    return stock;
+  }
+
+  public void setStock(String stock) {
+    this.stock = stock;
   }
 
 

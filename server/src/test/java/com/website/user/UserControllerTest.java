@@ -1,4 +1,4 @@
-package com.website;
+package com.website.user;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
