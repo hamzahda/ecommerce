@@ -1,23 +1,20 @@
 <template>
-  <div class="product">
-    <div>
-      <img :src="product.link" />
-    </div>
-    <div class="details">
-      <div class="name">{{product.name}}</div>
-      <div class="price">{{product.price}}</div>
-      <input ref="nrInput" type="number" value="1" />
-      <button class="butn" @click="addToCart(product, this.$refs.nrInput.value)">ADD TO CART</button>
-    </div>
-  </div>
+		<div class="card">
+			<div class="img">
+				<img src="@/assets/index.jpg">
+			</div>
+			<div class="contentbox">
+				
+        Price : {{product.price}}$ <br/>
+        <input type="number" value="1">
+        <button>ADD TO CART</button>
+			</div>
+		</div>
 </template>
-
 <script>
-import { mapActions } from "vuex";
 export default {
   props: ["product"],
   methods: {
-    ...mapActions(["addToCart", "remove"], "cart")
   },
   computed: {},
   data: () => {
@@ -28,21 +25,34 @@ export default {
 };
 </script>
 <style scoped>
-.product {
-  text-align: center;
-  background-color: rosybrown;
-
+.card{
   width: 11rem;
-  height: 11rem;
+  
+
+
+  margin: 1rem;
+  padding: 1rem;
 }
-input {
+
+
+img{
+  width: 8rem;
+  height: fit-content;
+}
+.img{
+  text-align: center;
+}
+.contentbox{
+  text-align: center;
+}
+input{
   width: 4rem;
-  border-style: none;
-
-
+  margin: 1rem;  
 }
-.deatils{
-  display: flex;
-  justify-content: center;
+button{
+  border-style: none;
+  padding: 1rem;
+
+  
 }
 </style>

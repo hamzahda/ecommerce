@@ -11,7 +11,13 @@
     </vueper-slides>
     <div class="center">
       <button class="button">SHOP NOW</button>
-      <div class="div">  <img src=""  >  </div>
+    </div>
+    <div class="d-block text-center">
+      <div class="private"><input type="text"><button>private club</button></div>
+      <br />
+      <div class="div">
+        <img src="../assets/join.jpg" />
+      </div>
     </div>
   </section>
 </template>
@@ -22,45 +28,42 @@ export default {
   name: "Welcome",
   components: { VueperSlides, VueperSlide },
   methods: {},
-  data: ()=>{
-    return{
+  data: () => {
+    return {
       slides: [
-    {
-      title: '',
-      content: '',
-      image: require('../assets/cosm.jpg')
-    },
-    {
-      title: '',
-      content: '',
-      image: require('../assets/cosm.jpg')
-    }
-  ],
-    }
+        {
+          title: "",
+          content: "",
+          image: require("../assets/cosm.jpg")
+        },
+        {
+          title: "",
+          content: "",
+          image: require("../assets/cosm.jpg")
+        }
+      ]
+    };
   }
 };
 </script>
 
 
 <style scoped>
-
-.center{
+.center {
   display: flex;
   justify-content: center;
 }
-#welcome{
-
+#welcome {
   background-color: whitesmoke;
   height: 100vh;
 }
-.button{
+.button {
   padding: 0.5rem;
   margin: 1rem;
 
   color: snow;
-  background-color:coral ;
+  background-color: coral;
 
   border-style: none;
 }
-
 </style>

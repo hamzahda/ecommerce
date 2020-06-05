@@ -8,18 +8,29 @@
         <b-button variant="outline-success" class="my-2 my-sm-0" type="submit">Search</b-button>
       </b-nav-form>
       <b-navbar-nav class="ml-auto">
-        <b-navbar-text>
-          <a href="/cart">  cart( {{count}} )  </a>
-        </b-navbar-text>
+        <b-button id="show-btn" @click="$bvModal.show('cart')">Cart({{count}})</b-button>
         <b-icon-minecart-loaded />
-        <b-button class="my-2 my-sm-0 login" right>LogIn</b-button>
+        <b-button class="my-2 my-sm-0 login" right v-if="!isAuth">LogIn</b-button>
+        <b-avatar text="BV" v-if="isAuth"></b-avatar>
       </b-navbar-nav>
     </b-navbar>
+    <b-modal id="cart" hide-footer>
+      <template v-slot:modal-title>
+        <h2>Cart</h2>
+      </template>
+      <div class="d-block text-center">
+        <h3>Hello From This Modal!</h3>
+        <div v-for="product in data" :product="product" :key="product.name">Name : {{product.name}} Price : {{product.price}}$</div>
+        <b-icon icon="plus"/><b-icon icon="minus"/>
+      </div>
+      <b-button class="mt-3" block @click="$bvModal.hide('cart')">Chekout</b-button>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
+import {cart} from "../assets/cart";
 export default {
   name: "header",
   components: {},
@@ -29,6 +40,12 @@ export default {
   },
   computed: {
     ...mapGetters(["count"], "cart")
+  },
+  data:()=>{
+    return{
+      isAuth:'',
+      data : cart
+    }
   }
 };
 </script>

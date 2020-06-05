@@ -28,11 +28,7 @@ const router = new VueRouter({
       name: "plist",
       component: () => import("./views/PList.vue"),
     },
-    {
-      path: "/cart",
-      name: "cart",
-      component: () => import("./views/Cart.vue"),
-    },
+    
   ],
 });
 new Vue({store,

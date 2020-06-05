@@ -12,7 +12,7 @@ public class ProductDTO {
   @ApiModelProperty(position =3)
   private String img_link;
   @ApiModelProperty(position =4)
-  private String stock;
+  private int stock;
 
   public String getName() {
       return name;
