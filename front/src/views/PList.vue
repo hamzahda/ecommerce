@@ -26,6 +26,7 @@ export default {
   justify-content: center;
 
   flex-direction: row;
+  background-color: #aaaaaa;
 }
 
 </style>

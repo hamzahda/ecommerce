@@ -10,8 +10,19 @@
       <b-navbar-nav class="ml-auto">
         <b-button id="show-btn" @click="$bvModal.show('cart')">Cart({{count}})</b-button>
         <b-icon-minecart-loaded />
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item-dropdown right>
+            <template v-if="isAuth" v-slot:button-content>
+              <em>Konto</em>
+            </template>
+            <b-dropdown-item href="#">Profile</b-dropdown-item>
+            <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+      </b-collapse>
         <b-button class="my-2 my-sm-0 login" right v-if="!isAuth">LogIn</b-button>
-        <b-avatar text="BV" v-if="isAuth"></b-avatar>
+        
       </b-navbar-nav>
     </b-navbar>
     <b-modal id="cart" hide-footer>
@@ -25,6 +36,7 @@
       </div>
       <b-button class="mt-3" block @click="$bvModal.hide('cart')">Chekout</b-button>
     </b-modal>
+
   </div>
 </template>
 
@@ -43,7 +55,7 @@ export default {
   },
   data:()=>{
     return{
-      isAuth:'',
+      isAuth: true,
       data : cart
     }
   }
