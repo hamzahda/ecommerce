@@ -10,7 +10,7 @@ import com.website.dto.UserDataDTO;
 import com.website.dto.UserLoginDTO;
 import com.website.dto.UserResponseDTO;
 import com.website.model.User;
-import com.website.service.UserService;
+import com.website.service.UserServiceImpl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class UserController {
   ModelMapper modelMapper;
 
   @Autowired
-  private UserService userService;
+  private UserServiceImpl userService;
   private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 

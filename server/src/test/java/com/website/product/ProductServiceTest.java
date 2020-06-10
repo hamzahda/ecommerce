@@ -1,4 +1,4 @@
-package com.website.Product;
+package com.website.product;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 import com.website.model.Product;
-import com.website.service.ProductService;
+import com.website.repository.ProductRepository;
 import com.website.service.ProductServiceImpl;
-import com.website.repository.*;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -44,7 +44,7 @@ public class ProductServiceTest {
         long id = 1;
         
         when(ProductRepository.findById(id)).thenReturn(Optional.of(mockProduct));
-        assertEquals(mockProduct, ProductService.findById(id));  
+        assertEquals(mockProduct, productService.getProduct(id));  
     }
 
     @Test
@@ -54,10 +54,12 @@ public class ProductServiceTest {
         
         Products.add(Product);
         when(Product.getId()).thenReturn(new Long(1));
-		when(Product.getProductname()).thenReturn("name");
+        when(Product.getName()).thenReturn("name");
+        when(Product.getStock()).thenReturn(100);
+        when(Product.getPrice()).thenReturn(1.00);
         when(ProductRepository.findAll()).thenReturn(Products);
         
-        List<Product> retrievedProducts = ProductService.getProduct();
+        List<Product> retrievedProducts = productService.getAll();
         
 		assertEquals(retrievedProducts.size(), Products.size());
         assertEquals(retrievedProducts.get(0), Products.get(0));
@@ -73,21 +75,22 @@ public class ProductServiceTest {
         when(Product.getPrice()).thenReturn(1.00);
 
 		when(ProductRepository.save(Product)).thenReturn(Product);
-		assertEquals(Product, ProductService.createProduct(Product));
+		assertEquals(Product, productService.createProduct(Product));
     }
 
 
     @Test
     public void modifProductTest(){
-        Product mockProduct = mock(Product.class);
+        Product Product = mock(Product.class);
         Product ProductData = mock(Product.class);
 
-        when(mockProduct.getId()).thenReturn((long) 1);
-        when(mockProduct.getEmail()).thenReturn("Product\'s adress");
-        when(mockProduct.getProductname()).thenReturn("name");        
+        when(Product.getId()).thenReturn(new Long(1));
+        when(Product.getName()).thenReturn("name");
+        when(Product.getStock()).thenReturn(100);
+        when(Product.getPrice()).thenReturn(1.00);     
 
-        when(ProductRepository.save(mockProduct)).thenReturn(mockProduct);
-        assertEquals(mockProduct, ProductService.changeDetails(mockProduct , ProductData));
+        when(ProductRepository.save(Product)).thenReturn(Product);
+        assertEquals(Product, productService.changeDetails(Product.getId() , ProductData));
     }
 
 
@@ -95,7 +98,7 @@ public class ProductServiceTest {
     @Test
     public void deleteProductTest(){
         Product Product = mock(Product.class);
-        ProductService.createProduct(Product);
+        productService.createProduct(Product);
         verify(ProductRepository).save(Product);    
     }
 
@@ -103,7 +106,7 @@ public class ProductServiceTest {
 	public void checkProduct() {
 		Long id = new Long(1);
 		when(ProductRepository.existsById(id)).thenReturn(true);
-		assertTrue(ProductService.checkProduct(id));
+		assertTrue(productService.checkProduct(id));
     }
     
     @Test
@@ -111,7 +114,7 @@ public class ProductServiceTest {
         String name = new String("name");
         Product Product = mock(Product.class);
 		when(ProductRepository.findByProductname(name)).thenReturn(Product);
-		assertTrue(ProductService.search(name) != null);
+		assertTrue(productService.search(name) != null);
     }
 
 }

@@ -3,6 +3,7 @@ package com.website.user;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.website.model.User;
-import com.website.service.UserService;
+import com.website.service.UserServiceImpl;
 
 import com.website.repository.*;
 
@@ -34,7 +35,7 @@ Author hamzahda
 public class UserServiceTest {
 
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userService;
     @Mock
     private UserRepository UserRepository;
     
@@ -90,15 +91,17 @@ public class UserServiceTest {
 
     @Test
     public void deleteUserTest(){
-        User user = mock(User.class);
-        userService.createUser(user);
-        verify(UserRepository).save(user);    
+        Long id = new Long(1);
+        userService.deleteUserById(id);
+
+        verify(UserRepository, times(1)).deleteById(id);
     }
 
     @Test
 	public void checkUser() {
 		Long id = new Long(1);
-		when(UserRepository.existsById(id)).thenReturn(true);
+        when(UserRepository.existsById(id)).thenReturn(true);
+        
 		assertTrue(userService.checkUser(id));
     }
     
@@ -106,6 +109,7 @@ public class UserServiceTest {
 	public void search() {
         String name = new String("name");
         User user = mock(User.class);
+        
 		when(UserRepository.findByUsername(name)).thenReturn(user);
 		assertTrue(userService.search(name) != null);
     }

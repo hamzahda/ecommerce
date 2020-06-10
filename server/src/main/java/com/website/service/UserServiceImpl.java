@@ -26,7 +26,7 @@ Author hamzahda
 
 
 @Service
-public class UserService implements IUserService {
+public class UserServiceImpl implements IUserService {
     @Autowired
     UserRepository userRepository;
     @Autowired

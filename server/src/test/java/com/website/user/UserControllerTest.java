@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.website.controller.UserController;
 import com.website.model.User;
-import com.website.service.UserService;
+import com.website.service.UserServiceImpl;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +31,7 @@ public class UserControllerTest {
 	UserController controller;
 
 	@Mock
-	UserService service;
+	UserServiceImpl service;
 
 	@Test
 	public void getUser() {
