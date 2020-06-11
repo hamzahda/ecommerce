@@ -1,8 +1,8 @@
 # Ecommerce Website
 
 **Table Of Contents**
-- [Project description](##project-description)
-- [Installation](##installation)
+- [Project description](#project-description)
+- [Installation](#installation)
 - [Usage](#example-usage)
 - [License](#license)
 
@@ -26,15 +26,24 @@ It's built using vuejs for the ui, spring boot for the server and mysql as a db.
 
 
 ## System Design
+**Server**
+<img src="./design/Untitled Diagram(2).jpg"/>
 
 
+**Front States**
+<img src="./design/vuex.jpg"/>
+
+
+## Swagger
+<img src="./server/swagger/swagger (1).png"/>
+<img src="./server/swagger/swagger (2).png"/>
 
 ## Installation
 
 **Requirements/Dependencies if not using docker:**
 - mysql
 - java sdk
-- 
+- gradle
 - nodejs
 
 
@@ -43,22 +52,27 @@ It's built using vuejs for the ui, spring boot for the server and mysql as a db.
 **Usage with Docker**
 Download or clone the project then
 ```
-$ cd /Eshop
+$ cd /ecommerce
 $ docker compose up
 ```
 **Usage W/o Docker**
 In this setup you'll need to open two <br>
 Download or clone the project then run the following cmds in the first <br>
 ```
-$ cd /Eshop/server
+$ cd /ecommerce/server
 $ gradle bootRun
 ```
 and the following in the second
 ```
-$ cd /Eshop/application
+$ cd /ecommerce/application
 $ npm run serve
 ```
 
+## todo (server side)
+* add sonarqube and better logging
+* add caching using redis and spring cache
+* add the search functionality using elasticsearch  
+* deploy on cloud foundry
 
 ## Contributing
 feel free to fork and contribute. 
@@ -66,11 +80,7 @@ feel free to fork and contribute.
 ## Support
 If you have any questions you can contact the author. Contact Information is provided at the end of this document. If you find any issues or bugs, create a new issue and make a pull request to fix it!
 
-## todo
-add sonarqube
-add caching using redis and spring cache
-add the search functionality using elasticsearch  
-deploy on cloud foundry
+
 
 ## License
 

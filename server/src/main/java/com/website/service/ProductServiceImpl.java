@@ -2,13 +2,15 @@ package com.website.service;
 
 import java.util.List;
 
-import com.website.dto.ProductDTO;
 import com.website.model.Product;
 import com.website.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProductServiceImpl implements IProductService {
+             
     @Autowired
     ProductRepository productRepository;
 
@@ -45,11 +47,11 @@ public class ProductServiceImpl implements IProductService {
     public boolean checkProduct(Long id) {
         return productRepository.existsById(id);
     }
-
+/*
     @Override
     public Product search(String name) {
         return productRepository.findByProductname(name);
     }
-
+*/
 
 }

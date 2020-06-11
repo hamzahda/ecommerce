@@ -2,7 +2,6 @@ package com.website.controller;
 
 import java.util.List;
 
-import com.website.dto.ProductDTO;
 import com.website.model.Product;
 import com.website.service.ProductServiceImpl;
 
@@ -16,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +29,7 @@ Author hamzahda
 */
 
 @RestController
-@RequestMapping("/Products")
+@RequestMapping("/products")
 public class ProductController {
 
   @Autowired
@@ -37,22 +37,22 @@ public class ProductController {
 
   @Autowired
   private ProductServiceImpl ProductService;
+
   private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
-
   /*
-    @return list of all the  Products
-  */
+   * @return list of all the Products
+   */
   @ApiOperation(value = "${ProductController.getAll}")
+  @GetMapping(value = "/")
   public ResponseEntity<List<Product>> getAll() {
     logger.info("GET: getAll");
     return ResponseEntity.ok(ProductService.getAll());
   }
 
-  
   /*
-    @return Product by his id
-  */
+   * @return Product by his id
+   */
   @ApiOperation(value = "${ProductController.getProducts(id)}")
   @GetMapping(value = "/{id}")
   public ResponseEntity<Product> getProduct(@PathVariable Long id) {
@@ -65,9 +65,10 @@ public class ProductController {
   }
 
   /*
-    @return created Product
-  */
+   * @return created Product
+   */
   @ApiOperation(value = "${ProductController.postProduct}")
+  @PostMapping(value = "/")
   public ResponseEntity<Product> postProduct(Product product) {
    logger.info("POST: postProduct");
    return ResponseEntity.ok(ProductService.createProduct(product));
@@ -78,12 +79,12 @@ public class ProductController {
     search for a Product
   */
 
-  @ApiOperation(value = "${ProductController.search(name)}")
-  @GetMapping(value = "/{Productname}")
-  public ProductDTO search(@PathVariable String Productname) {
+  //@ApiOperation(value = "${ProductController.search(name)}")
+  //@GetMapping(value = "/{Productname}")
+  /*public ProductDTO search(@PathVariable String Productname) {
     logger.info("GET: search");
     return modelMapper.map(ProductService.search(Productname), ProductDTO.class);
-  }
+  }*/
   
   
   
