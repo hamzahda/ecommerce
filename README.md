@@ -2,6 +2,8 @@
 
 **Table Of Contents**
 - [Project description](#project-description)
+- [System design](#project-description)
+- [Swagger](#installation)
 - [Installation](#installation)
 - [Usage](#example-usage)
 - [License](#license)
